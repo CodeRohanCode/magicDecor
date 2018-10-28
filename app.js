@@ -20,7 +20,7 @@ smtpTransport.sendMail(mailOptions, function(error, response){
         console.log(error);
     
  }else{
-        console.log("Message sent: " + response.message);
+        alert('Successfully sent the mail!!!');
    
      }
 });
