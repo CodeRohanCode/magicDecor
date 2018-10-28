@@ -1,26 +1,28 @@
-const nodemailer = require('nodemailer');
-var smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
-    auth: {
-        user: "jiomerelal.test",
-        pass: "Iw2bagpiml_"
-    }
-});
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+const app = express();
 
-var mailOptions={
-    to : "rohan.pareek@mindtree.com",
-    subject : "Node Mail",
-    text : "Hi, This mail is auto generated through Node.",
-    html : "<h1>And this is with <b>HTML</b><i>tags</i></h1>"
-}
-console.log(mailOptions);
-smtpTransport.sendMail(mailOptions, function(error, response){
- if(error){
-        console.log(error);
-    
- }else{
-        alert('Successfully sent the mail!!!');
-   
-     }
-});
+//cors error solution
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, PATCH, DELETE");
+    res.header("Access-Control-Allow-Headers", "*");
+    res.header('Access-Control-Allow-Credentials', 'true')
+    next();
+    }); 
+
+    //Parsers
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+
+const api = require('./server/routes/api')
+
+
+//API location
+app.use('/api', api);
+
+//set port
+const port = process.env.PORT || '3000';
+app.set('port', port);
+app.listen(port, () => console.log(`Running on localhost: ${port}`));
