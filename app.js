@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
-const api = require('./server/routes/api')
+const api = require('./api')
 
 
 //API location
