@@ -4,9 +4,7 @@
   "description": "Sending mail using nodejs",
   "main": "index.js",
   "scripts": {
-    start": "node app.js",
-    "postinstall": "npm install"
-  },
+    start": "node app.js"  },
   "author": "Rohan",
   "license": "ISC",
   "dependencies": {
