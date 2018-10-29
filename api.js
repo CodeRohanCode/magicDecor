@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
 const app = express();
 const nodemailer = require('nodemailer');
@@ -30,7 +30,28 @@ router.get('/sendmail', (req, res) => {
         console.log(error);
     res.send("error");
  }else{
-        
+    MongoClient.connect('mongodb://<rohan>:<Iw2babgpiml_>@ds243963.mlab.com:43963/testmongodb', function (err, client) {
+        if (err) {
+            
+            res.send('error');
+            return;
+        }
+        else
+            var db = client.db('testmongodb')
+        db.collection('testcollection').insertOne({
+            user: 'Rohan',
+            email: 'jiomerelal@gmail.com'
+        })
+            .then(result => {
+                if(result) {
+                    res.send('inserted')
+                }
+                else {
+                    res.send('error')
+                }
+            })
+    })
+
     res.send("sent");
      }
 });
