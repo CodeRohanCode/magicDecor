@@ -30,10 +30,10 @@ router.get('/sendmail', (req, res) => {
         console.log(error);
     res.send("error");
  }else{
-    MongoClient.connect('mongodb://<rohan>:<Iw2babgpiml_>@ds243963.mlab.com:43963/testmongodb', function (err, client) {
+    MongoClient.connect('mongodb://<rohan>:<Iw2bagpiml_>@ds243963.mlab.com:43963/testmongodb', function (err, client) {
         if (err) {
             
-            res.send('error');
+            res.send(err);
             return;
         }
         else
@@ -42,12 +42,12 @@ router.get('/sendmail', (req, res) => {
             user: 'Rohan',
             email: 'jiomerelal@gmail.com'
         })
-            .then(result => {
+            .then(result, err => {
                 if(result) {
                     res.send('inserted')
                 }
                 else {
-                    res.send('error')
+                    res.send(err)
                 }
             })
     })
